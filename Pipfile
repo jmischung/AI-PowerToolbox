@@ -7,6 +7,8 @@ name = "pypi"
 streamlit = "*"
 openai = "*"
 langchain = "*"
+pytube3 = "*"
+vimeo-downloader = "*"
 
 [dev-packages]
 watchdog = "*"

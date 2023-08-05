@@ -1,4 +1,4 @@
-# GPT4-VideoSummarizer
+# AI PowerToolbox
 
 This project is a multi-page Streamlit app that houses various tools built around OpenAI's GPT-4. The first tool is a video summarizer that takes a link to a YouTube or Vimeo video, extracts and transcribes the audio using OpenAI Whisper, and then uses GPT-4 to summarize the video.
 

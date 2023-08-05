@@ -1,0 +1,54 @@
+# .gitignore
+
+# General
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.swp
+*.swo
+*.swn
+*.bak
+*.tmp
+
+# Virtual environment
+venv/
+.venv/
+
+# Environment variables and secrets
+.env
+.env.*
+.secret
+.secret.*
+.streamlit/
+
+# Linters
+.flake8
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# PyCharm
+.idea/
+*.iml
+
+# Visual Studio Code
+.vscode/
+
+# Jupyter Notebook
+notebooks/
+
+# Local references
+local_references/

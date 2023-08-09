@@ -7,12 +7,13 @@ name = "pypi"
 streamlit = "*"
 openai = "*"
 langchain = "*"
-pytube3 = "*"
 vimeo-downloader = "*"
+pytube = "*"
 
 [dev-packages]
 watchdog = "*"
 flake8 = "*"
+ipykernel = "*"
 
 [requires]
 python_version = "3.10"

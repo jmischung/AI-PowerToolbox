@@ -23,6 +23,9 @@ venv/
 .secret.*
 .streamlit/
 
+# Temporary files
+temp/
+
 # Linters
 .flake8
 

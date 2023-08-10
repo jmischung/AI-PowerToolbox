@@ -1,5 +1,5 @@
 import streamlit as st
-from utils.video_summarizer_utils import get_audio_youtube, transcribe_audio
+import utils.video_summarizer_utils as vs
 
 
 def summarize_video(video_platform, video_url, page_embed):
@@ -16,10 +16,11 @@ def summarize_video(video_platform, video_url, page_embed):
         str: A summary of the video.
     """
     # Call function to summarize video
-    get_audio_youtube(video_url)
-    transcription = transcribe_audio('./temp/audio.mp4')
+    vs.get_audio_youtube(video_url)
+    transcription = vs.transcribe_audio('./temp/audio.mp4')
+    key_points = vs.key_points_extraction(transcription)
 
-    return transcription
+    return key_points
 
 
 def app():

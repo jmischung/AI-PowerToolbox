@@ -8,7 +8,7 @@ streamlit = "*"
 openai = "*"
 langchain = "*"
 vimeo-downloader = "*"
-pytube = "*"
+pytube = {git = "https://github.com/jmischung/pytube.git", branch = "master", editable = true}
 
 [dev-packages]
 watchdog = "*"

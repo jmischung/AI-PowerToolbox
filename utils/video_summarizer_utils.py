@@ -1,10 +1,15 @@
 import os
+from pathlib import Path
 import openai
 import streamlit as st
 from pytube import YouTube
 
 # Set OpenAI API key
 openai.api_key = st.secrets["OPENAI_API_KEY"]
+
+# Set paths
+PROJECT_ROOT = Path(__file__).parent.parent
+TEMP_DIR = PROJECT_ROOT / 'temp'
 
 
 def get_audio_youtube(url):
@@ -16,7 +21,7 @@ def get_audio_youtube(url):
     medium_quality_stream = audio_streams[len(audio_streams) // 2]
 
     # Download the audio stream
-    medium_quality_stream.download(filename='./temp/audio.mp4')
+    medium_quality_stream.download(filename=TEMP_DIR / 'audio.mp4')
 
 
 def transcribe_audio(audio_file_path):

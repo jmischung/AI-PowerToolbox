@@ -1,5 +1,10 @@
+from pathlib import Path
 import streamlit as st
 import utils.video_summarizer_utils as vs
+
+# Set paths
+PROJECT_ROOT = Path(__file__).parent.parent
+TEMP_DIR = PROJECT_ROOT / 'temp'
 
 
 def summarize_video(video_platform, video_url, page_embed):
@@ -17,7 +22,7 @@ def summarize_video(video_platform, video_url, page_embed):
     """
     # Call function to summarize video
     vs.get_audio_youtube(video_url)
-    transcription = vs.transcribe_audio('./temp/audio.mp4')
+    transcription = vs.transcribe_audio(TEMP_DIR / 'audio.mp4')
     key_points = vs.key_points_extraction(transcription)
 
     return key_points

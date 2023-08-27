@@ -22,6 +22,7 @@ venv/
 .secret
 .secret.*
 .streamlit/
+config.yaml
 
 # Temporary mp4 files
 temp/*.mp4

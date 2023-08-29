@@ -56,3 +56,7 @@ notebooks/
 
 # Local references
 local_references/
+
+# systemd (server)
+start_streamlit.sh
+

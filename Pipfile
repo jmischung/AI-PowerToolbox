@@ -11,6 +11,8 @@ vimeo-downloader = "*"
 pytube = {git = "https://github.com/jmischung/pytube.git", branch = "master", editable = true}
 streamlit-authenticator = "*"
 pyyaml = "*"
+st-pages = "*"
+streamlit-extras = "*"
 
 [dev-packages]
 watchdog = "*"

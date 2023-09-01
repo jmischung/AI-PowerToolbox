@@ -1,5 +1,6 @@
 from pathlib import Path
 import streamlit as st
+from streamlit_extras.switch_page_button import switch_page
 import streamlit_authenticator as stauth
 import utils.video_summarizer_utils as vs
 import yaml
@@ -77,7 +78,7 @@ def app():
     elif st.session_state["authentication_status"] is False:
         st.error('Username/password is incorrect')
     elif st.session_state["authentication_status"] is None:
-        st.warning('Please enter your username and password')
+        switch_page("home")
 
 
 if __name__ == '__main__':

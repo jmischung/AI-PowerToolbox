@@ -7,6 +7,10 @@ from st_pages import Page, show_pages
 import yaml
 from yaml.loader import SafeLoader
 
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
 LOGGER = get_logger(__name__)
 
 # Load config file
@@ -43,32 +47,32 @@ def app():
 
         # Set sidebar
         show_pages([
-            Page("home.py", "Home", icon="🏠"),
+            Page("welcome.py", "Home", icon="🏠"),
             Page("pages/video_summarizer.py", "Video Summarizer", icon="🎥"),
         ])
-        authenticator.logout('Logout', 'sidebar', key='home')
+        authenticator.logout('Logout', 'sidebar', key='welcome')
     elif authentication_status is False:
         st.error("Incorrect username or password. Please try again.")
     elif authentication_status is None:
         # Display title and text before login
         st.title("Welcome")
         st.write("""
-            You've found Origin 46's AI-Powered Toolbox. All of your analytics, 
+            You've found Origin 46's AI-Powered Toolbox. All of our analytics, 
             information, and AI-powered apps to make work and life easier are here.\n\n
             To gain access, click the 'Request Access' dropdown below and fill out 
             the form. Once you've been approved, you'll receive an email inviting 
-            inviting you to create an account.
+            you to create an account.
         """)
 
         # Set sidebar
         show_pages([
-            Page("home.py", "Home", icon="🏠"),
+            Page("welcome.py", "Home", icon="🏠"),
             Page("pages/video_summarizer.py", "Video Summarizer", icon="🎥"),
         ])
 
         # Request access form
         expander = st.expander("Request Access", expanded=False)
-        with expander.form("Request Access"):
+        with expander.form("Request Access", clear_on_submit=True):
             # Form fields
             st.write("Please fill out the form below to request access.")
             form_name = st.text_input("Name")
@@ -79,10 +83,30 @@ def app():
             submitted = st.form_submit_button("Submit")
             if submitted:
                 LOGGER.info("Submitted")
+
+                # Set up email message
+                msg = MIMEMultipart()
+                msg['From'] = st.secrets['EMAIL_SENDER']
+                msg['To'] = st.secrets['EMAIL_RECIPIENT']
+                msg['Subject'] = 'Origin46 - AI Lab New Access Request'
+
+                body = f"Name: {form_name}\nEmail: {form_email}\nMessage: {form_note}"
+                msg.attach(MIMEText(body, 'plain'))
+
+                # Send email
+                with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
+                    smtp.starttls()
+                    smtp.login(
+                        st.secrets['EMAIL_SENDER'],
+                        st.secrets['EMAIL_PASSWORD']
+                    )
+                    smtp.send_message(msg)
+
                 st.success(
                     "Your request has been submitted. You will receive an email "
                     "once your request has been approved."
                 )
+                st.write(st.session_state)
 
 
 if __name__ == '__main__':

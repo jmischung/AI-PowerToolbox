@@ -67,7 +67,6 @@ def app():
         # Set sidebar
         show_pages([
             Page("welcome.py", "Home", icon="🏠"),
-            Page("pages/video_summarizer.py", "Video Summarizer", icon="🎥"),
         ])
 
         # Request access form
@@ -106,7 +105,6 @@ def app():
                     "Your request has been submitted. You will receive an email "
                     "once your request has been approved."
                 )
-                st.write(st.session_state)
 
 
 if __name__ == '__main__':

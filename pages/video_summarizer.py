@@ -1,3 +1,10 @@
+"""
+This file contains the implementation of the Video Summarizer page for the
+Streamlit app. It allows the user to input a video URL from YouTube or Vimeo,
+and generates a summary of the video using the `utils.video_summarizer_utils`
+module. The page is added to the sidebar and can only be accessed by
+authenticated users.
+"""
 import yaml
 from yaml.loader import SafeLoader
 from pathlib import Path
@@ -60,8 +67,8 @@ def app():
     input a video URL, optionally input a page embed, and get a video summary.
     - Non-authenticated users receive an error message.
     """
-    # Render login module
-    name, authentication_status, username = authenticator.login('Login', 'main')
+    # # Render login module
+    # name, authentication_status, username = authenticator.login('Login', 'main')
 
     # Check if user is authenticated
     if st.session_state['authentication_status']:

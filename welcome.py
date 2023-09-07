@@ -1,3 +1,8 @@
+"""
+This file contains the implementation of the Welcome page for the Streamlit app.
+It displays a welcome message and allows the user to log in or submit a form
+requesting to be registered and added to the preauthorization list.
+"""
 import streamlit as st
 import streamlit_authenticator as stauth
 from streamlit_extras.switch_page_button import switch_page
@@ -29,12 +34,11 @@ authenticator = stauth.Authenticate(
 
 def app():
     """
-    This function defines the home page of the Streamlit app.
-
-    It sets the title of the page and displays some text. It also prompts the
-    user to select a page from the sidebar.
+    This function is the main entry point for the Welcome page. It displays a
+    welcome message and allows the user to log in or submit a form requesting to
+    be registered and added to the preauthorization list. If the user is
+    authenticated, it redirects the user to the Home page for authorized users.
     """
-
     # Render login module
     name, authentication_status, username = authenticator.login('Login', 'sidebar')
 
@@ -43,6 +47,7 @@ def app():
         Page("welcome.py", "Welcome"),
         Page("pages/home.py", "Home", icon="🏠"),
         Page("pages/video_summarizer.py", "Video Summarizer", icon="🎥"),
+        Page("pages/sign_up.py", "Sign Up", icon="📝")
     ])
 
     # Check if user is authenticated
@@ -65,7 +70,8 @@ def app():
         # Set sidebar
         hide_pages([
             "Home",
-            "Video Summarizer"
+            "Video Summarizer",
+            "Sign Up"
         ])
 
         # Request access form

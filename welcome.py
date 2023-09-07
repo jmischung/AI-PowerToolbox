@@ -2,7 +2,7 @@ import streamlit as st
 import streamlit_authenticator as stauth
 from streamlit_extras.switch_page_button import switch_page
 from streamlit.logger import get_logger
-from st_pages import Page, show_pages
+from st_pages import Page, show_pages, hide_pages
 
 import yaml
 from yaml.loader import SafeLoader
@@ -38,19 +38,17 @@ def app():
     # Render login module
     name, authentication_status, username = authenticator.login('Login', 'sidebar')
 
+    # Set sidebar
+    show_pages([
+        Page("welcome.py", "Welcome"),
+        Page("pages/home.py", "Home", icon="🏠"),
+        Page("pages/video_summarizer.py", "Video Summarizer", icon="🎥"),
+    ])
+
     # Check if user is authenticated
     if authentication_status:
-        switch_page("video summarizer")
-        # Display title and text
-        st.title("Welcome to my AI-Powered Toolbox!")
-        st.write("Select a tool from the sidebar to get started.")
-
-        # Set sidebar
-        show_pages([
-            Page("welcome.py", "Home", icon="🏠"),
-            Page("pages/video_summarizer.py", "Video Summarizer", icon="🎥"),
-        ])
-        authenticator.logout('Logout', 'sidebar', key='welcome')
+        # Redirect to home page after login
+        switch_page("home")
     elif authentication_status is False:
         st.error("Incorrect username or password. Please try again.")
     elif authentication_status is None:
@@ -65,8 +63,9 @@ def app():
         """)
 
         # Set sidebar
-        show_pages([
-            Page("welcome.py", "Home", icon="🏠"),
+        hide_pages([
+            "Home",
+            "Video Summarizer"
         ])
 
         # Request access form

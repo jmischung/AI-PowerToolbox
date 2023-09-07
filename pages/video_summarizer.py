@@ -1,10 +1,13 @@
+import yaml
+from yaml.loader import SafeLoader
 from pathlib import Path
+
 import streamlit as st
 from streamlit_extras.switch_page_button import switch_page
 import streamlit_authenticator as stauth
+from st_pages import Page, show_pages
+
 import utils.video_summarizer_utils as vs
-import yaml
-from yaml.loader import SafeLoader
 
 # Load config file
 with open("config.yaml") as file:
@@ -47,10 +50,15 @@ def summarize_video(video_platform, video_url, page_embed):
 
 def app():
     """
-    This function defines the home page of the Streamlit app.
+    The primary application function for the Streamlit video summarizer app.
 
-    It sets the title of the page and displays some text. It also prompts the
-    user to select a page from the sidebar.
+    This function initializes the Streamlit application, handles user authentication,
+    and provides interface elements for video selection and summarization.
+
+    Based on user authentication status, it displays the corresponding interface:
+    - Authenticated users are presented with options to select a video platform,
+    input a video URL, optionally input a page embed, and get a video summary.
+    - Non-authenticated users receive an error message.
     """
     # Render login module
     name, authentication_status, username = authenticator.login('Login', 'main')
@@ -61,6 +69,12 @@ def app():
         st.title("Video Summarizer")
         st.write("Instructions here...")
         st.write("")  # Add whitespace between description and radio buttons
+
+        # Set sidebar
+        show_pages([
+            Page("pages/home.py", "Home", icon="🏠"),
+            Page("pages/video_summarizer.py", "Video Summarizer", icon="🎥")
+        ])
 
         # Add radio buttons for video platform selection
         video_platform = st.radio("Select a video platform", ("YouTube", "Vimeo"), index=0)
@@ -75,10 +89,11 @@ def app():
         if st.button("Summarize"):
             summary = summarize_video(video_platform, video_url, page_embed)
             st.markdown(summary)
-    elif st.session_state["authentication_status"] is False:
-        st.error('Username/password is incorrect')
-    elif st.session_state["authentication_status"] is None:
-        switch_page("home")
+    else:
+        show_pages([
+            Page("welcome.py", "Welcome"),
+        ])
+        switch_page("welcome")
 
 
 if __name__ == '__main__':

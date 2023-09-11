@@ -6,6 +6,7 @@ import streamlit as st
 from streamlit_extras.switch_page_button import switch_page
 import streamlit_authenticator as stauth
 from st_pages import Page, show_pages
+from st_audiorec import st_audiorec
 
 from utils.pages_list import sidebar_pages
 
@@ -37,6 +38,9 @@ def app():
 
         # Set sidebar
         show_pages(sidebar_pages)
+
+        # Instantiate audio recorder
+        wav_audio_data = st_audiorec()
     else:
         show_pages([
             Page("welcome.py", "Welcome"),

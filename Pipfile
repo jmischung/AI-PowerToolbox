@@ -13,6 +13,7 @@ streamlit-authenticator = "*"
 pyyaml = "*"
 st-pages = "*"
 streamlit-extras = "*"
+streamlit-audiorec = "*"
 
 [dev-packages]
 watchdog = "*"

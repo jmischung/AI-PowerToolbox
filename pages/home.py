@@ -10,6 +10,7 @@ import streamlit_authenticator as stauth
 from streamlit_extras.switch_page_button import switch_page
 from st_pages import Page, show_pages
 
+from utils.pages_list import sidebar_pages
 
 import yaml
 from yaml.loader import SafeLoader
@@ -41,10 +42,7 @@ def app():
         st.write("Welcome to my AI-Powered Toolbox!")
 
         # Set sidebar pages
-        show_pages([
-            Page("pages/home.py", "Home", icon="🏠"),
-            Page("pages/video_summarizer.py", "Video Summarizer", icon="🎥"),
-        ])
+        show_pages(sidebar_pages)
     else:
         show_pages([
             Page("welcome.py", "Welcome"),

@@ -15,6 +15,7 @@ import streamlit_authenticator as stauth
 from st_pages import Page, show_pages
 
 import utils.video_summarizer_utils as vs
+from utils.pages_list import sidebar_pages
 
 # Load config file
 with open("config.yaml") as file:
@@ -67,9 +68,6 @@ def app():
     input a video URL, optionally input a page embed, and get a video summary.
     - Non-authenticated users receive an error message.
     """
-    # # Render login module
-    # name, authentication_status, username = authenticator.login('Login', 'main')
-
     # Check if user is authenticated
     if st.session_state['authentication_status']:
         authenticator.logout('Logout', 'sidebar', key='video_summarizer')
@@ -78,10 +76,7 @@ def app():
         st.write("")  # Add whitespace between description and radio buttons
 
         # Set sidebar
-        show_pages([
-            Page("pages/home.py", "Home", icon="🏠"),
-            Page("pages/video_summarizer.py", "Video Summarizer", icon="🎥")
-        ])
+        show_pages(sidebar_pages)
 
         # Add radio buttons for video platform selection
         video_platform = st.radio("Select a video platform", ("YouTube", "Vimeo"), index=0)

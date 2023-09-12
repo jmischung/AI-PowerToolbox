@@ -24,8 +24,9 @@ venv/
 .streamlit/
 config.yaml
 
-# Temporary mp4 files
+# Temporary files
 temp/*.mp4
+temp/*.wav
 
 # Linters
 .flake8

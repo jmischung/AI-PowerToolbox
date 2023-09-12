@@ -14,6 +14,7 @@ pyyaml = "*"
 st-pages = "*"
 streamlit-extras = "*"
 streamlit-audiorec = "*"
+openai-whisper = {git = "git+https://github.com/openai/whisper.git"}
 
 [dev-packages]
 watchdog = "*"

@@ -61,7 +61,7 @@ def app():
 
             # Transcribe audio
             output = model.transcribe(audio_file_path, fp16=False)
-            st.write(output["text"])
+            st.code(output["text"], language="plain")
 
             # Delete audio file
             os.remove(audio_file_path)
